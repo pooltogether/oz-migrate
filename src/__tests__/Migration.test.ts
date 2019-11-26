@@ -34,5 +34,9 @@ describe('Migration', () => {
       migration = new Migration(migrationFile)
       expect(await migration.getVersion()).toEqual(6)
     })
+
+    it('should fail when a migration fails', async () => {
+      await expect(migration.migrate(6, () => { throw 'fail' })).rejects.toEqual('fail')
+    })
   })
 })

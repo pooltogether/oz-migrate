@@ -39,6 +39,7 @@ export class Migration {
         }
       } catch (e) {
         console.error(e.message, e)
+        throw e
       }
       await this.setVersion(version)
     }
