@@ -7,7 +7,9 @@ export default {
     format: 'cjs'
   },
   external: [
-    'tslib'
+    'tslib',
+    'fs',
+    'util'
   ],
   plugins: [
     typescript()

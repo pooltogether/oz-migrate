@@ -1,7 +1,6 @@
 import path from 'path'
+import fs from 'fs'
 import { Migration } from '../Migration'
-
-const fs = require('fs')
 
 describe('Migration', () => {
 
@@ -28,9 +27,9 @@ describe('Migration', () => {
     })
 
     it('should support multiple', async () => {
-      await migration.migrate(2, Promise.resolve('hello'))
-      await migration.migrate(5, Promise.resolve('hello'))
-      await migration.migrate(6, Promise.resolve('hello'))
+      await migration.migrate(2, () => 'hello')
+      await migration.migrate(5, () => 'hello')
+      await migration.migrate(6, () => 'hello')
 
       migration = new Migration(migrationFile)
       expect(await migration.getVersion()).toEqual(6)

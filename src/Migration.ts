@@ -31,7 +31,15 @@ export class Migration {
     const currentVersion = await this.getVersion()
 
     if (currentVersion < version) {
-      await callback()
+      try {
+        if (typeof callback === 'function') {
+          await callback()
+        } else {
+          await callback
+        }
+      } catch (e) {
+        console.error(e.message, e)
+      }
       await this.setVersion(version)
     }
   }
