@@ -9,7 +9,9 @@ export default {
   external: [
     'tslib',
     'fs',
-    'util'
+    'util',
+    'mkdirp-promise',
+    'path'
   ],
   plugins: [
     typescript()
