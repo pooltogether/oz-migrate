@@ -1,7 +1,10 @@
-import mkdirp from 'mkdirp-promise'
 import path from 'path'
-
 import { Migration } from './Migration'
+
+const util = require('util')
+const mkdirp = require('mkdirp')
+
+const mkdirpAsync = util.promisify(mkdirp)
 
 export class Project {
 
@@ -9,7 +12,7 @@ export class Project {
 
   async migrationForNetwork (networkName: string): Promise<Migration> {
     const dirPath = path.resolve(this.migrationDir)
-    await mkdirp(dirPath)
+    await mkdirpAsync(dirPath)
     const migrationPath = path.resolve(path.join(dirPath, networkName))
     return new Migration(migrationPath)
   }
