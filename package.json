@@ -1,17 +1,22 @@
 {
-  "name": "oz-migrate",
-  "version": "0.2.4",
-  "description": "Easily track migrations",
+  "name": "@pooltogether/oz-migrate",
+  "version": "0.2.5",
+  "description": "Easily track Ethereum smart contract migrations",
   "main": "dist/bundle.js",
   "license": "MIT",
   "repository": "git@github.com:pooltogether/oz-migrate.git",
   "author": "Brendan Asselstine brendan@pooltogether.us",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "jest",
     "dist": "rollup -c rollup.config.js",
     "watch": "rollup -w -c rollup.config.js",
     "coverage": "jest --coverage --coverageReporters html",
-    "test-watch": "jest --watchAll"
+    "test-watch": "jest --watchAll",
+    "prepack": "yarn dist",
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags"
   },
   "peerDependencies": {},
   "devDependencies": {
